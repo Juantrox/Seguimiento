@@ -1,0 +1,29 @@
+App seguimiento:
+
+*opción 1 y 2: form (Op1: Clientes / Inventario nuevo)
+
+*Generción automatica de ID (Diferentes para Cliente e inventario(Deshabilitado ID de impresión)) y fecha de ingreso (ventaja emergente "JoptionPane" en el momento que se ingresa el equipo)
+
+(Cambiar de Json a base de datos y la visualizacón dentro de la misma aplicación)
+
+*Conexión con impresora (recibo con: Nombre cliente, ID y fecha / impresión de secuencial para los tv´s)
+
+*Tabla de historial Opción 3 + filtros
+
+*Sistema de clientes frecuentes (Ingreso de X televisores por cliente frecuente(Imprimir solo etiquetas para los tv´s))
+
+*Admin: Adquisicion de televisores - Inventario / Eliminar cosas del sistema (Borrado , edicion)
+
+*Operario: Opciones base (Entrada, salida, historial)
+
+*Modalidades: Admin y operario
+
+*Sistema de inventario: sistema de base de datos sincronizada en red local (Una tabla aparte para inventario y otra para clientes)
+
+*Asignación de areas manual (Union ACF, Laser, Tecnico)
+
+*Estado: 1) En Proceso 2) repado 3) N.S.R 4) Bodegaje (Demora de recogida final de más de x tiempo empieza a cobrar bodegaje (Tarifa a asignar de forma manual))
+
+*Opcional: Modo configuración para asignación personalizada de tiempos y Costos (En espera)
+
+*Sistema de anualidades (Mantenimiento y servicio tecnico)
