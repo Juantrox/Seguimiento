@@ -17,8 +17,6 @@ public class Menu extends javax.swing.JPanel implements ActionListener {
             {"opcion1", "Iconos/I1.png"},
             {"opcion2", "Iconos/I2.png"},
             {"opcion3", "Iconos/I3.png"},
-            {"opcion4", "Iconos/I4.png"},
-            {"opcion5", "Iconos/I5.png"},
             {"Guardar", "Iconos/I6.png"}
     };
 
@@ -74,12 +72,6 @@ public class Menu extends javax.swing.JPanel implements ActionListener {
                 break;
             case "opcion3":
                 MPAdd(new Opciones.Opcion3());
-                break;
-            case "opcion4":
-                MPAdd(new Opciones.Opcion4());
-                break;
-            case "opcion5":
-                MPAdd(new Opciones.Opcion5());
                 break;
             case "Guardar":
                 System.exit(0);

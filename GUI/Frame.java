@@ -38,7 +38,7 @@ public class Frame extends JFrame {
         titleBar.setPreferredSize(new Dimension(0, 40));
         titleBar.setBackground(new Color(45, 45, 45));
 
-        JLabel title = new JLabel("  Mi Aplicación");
+        JLabel title = new JLabel("  Seguimiento");
         title.setForeground(Color.WHITE);
         title.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 
