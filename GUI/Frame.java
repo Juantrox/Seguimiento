@@ -115,7 +115,9 @@ public class Frame extends JFrame {
         JPanel content = new JPanel(new BorderLayout());
         content.setBackground(new Color(30, 30, 30));
 
-        JLabel label = new JLabel("Contenido de la aplicación");
+        DB.Conexion conexion = new DB.Conexion();
+
+        JLabel label = new JLabel(conexion.ConexionDB());
         label.setForeground(Color.WHITE);
         label.setHorizontalAlignment(SwingConstants.CENTER);
         content.add(label, BorderLayout.CENTER);
@@ -131,18 +133,6 @@ public class Frame extends JFrame {
 
         add(mainPanel);
 
-        // Actualiza bordes redondeados al redimensionar
-        addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-
-                setShape(new RoundRectangle2D.Double(
-                        0, 0,
-                        getWidth(),
-                        getHeight(),
-                        15, 15));
-            }
-        });
     }
 
     /**
@@ -171,7 +161,7 @@ public class Frame extends JFrame {
                 button.setBackground(new Color(60, 60, 60));
             }
 
-            @Override
+           @Override
             public void mouseExited(MouseEvent e) {
                 button.setOpaque(false);
                 button.repaint();

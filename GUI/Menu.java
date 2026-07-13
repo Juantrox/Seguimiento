@@ -77,8 +77,8 @@ public class Menu extends javax.swing.JPanel implements ActionListener {
                 break;
             case "Guardar":
                 Conexion conexion = new Conexion();
-                conexion.cerrarConexion(null);
-                //System.exit(0);
+                conexion.cerrarConexion();
+                System.exit(0);
                 break;
             default:
                 break;

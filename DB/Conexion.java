@@ -6,35 +6,44 @@ import java.sql.SQLException;
 
 public class Conexion {
 
+    private static final String url = "jdbc:mysql://127.0.0.1:3306/gestion";
+    private static final String usuario = "root";
+    private static final String password = "0000";
 
+    public String ConexionDB() {
+        String mensaje = "";
 
-    public void ConexionDB() {
-        String url = "jdbc:mysql://127.0.0.1:3306/gestion";
-        String usuario = "root";
-        String password = "0000";
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conexion = DriverManager.getConnection(url, usuario, password);
-            System.out.println("¡Conexión exitosa a la base de datos!");
+        try (Connection conexion = getConnection()) {
+            if (conexion != null && !conexion.isClosed()) {
+                mensaje = "¡Conexión exitosa a la base de datos!";
+            }
         } catch (SQLException e) {
-            System.out.println("Error al conectar a la base de datos");
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            System.out.println("Error al cargar el controlador JDBC");
-            e.printStackTrace();
+            mensaje = "Error al conectar a la base de datos";
         }
 
+        return mensaje;
     }
 
-    public void cerrarConexion(Connection conexion) {
-            try {
-                conexion.close();
+    public Connection getConnection() throws SQLException {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("Error al cargar el controlador JDBC", e);
+        }
+
+        return DriverManager.getConnection(url, usuario, password);
+    }
+
+    public void cerrarConexion() {
+        try (Connection conexion = getConnection()) {
+            if (conexion != null) {
                 System.out.println("Conexión cerrada correctamente.");
-            } catch (SQLException e) {
-                System.out.println("Error al cerrar la conexión.");
-                e.printStackTrace();
+                conexion.close();
             }
-        
+        } catch (SQLException e) {
+            System.out.println("Error al cerrar la conexión.");
+            e.printStackTrace();
+        }
     }
 }

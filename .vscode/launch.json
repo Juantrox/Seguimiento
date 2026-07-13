@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Main",
+      "type": "java",
+      "request": "launch",
+      "mainClass": "Main",
+      "projectName": "seguimiento",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ]
+}
