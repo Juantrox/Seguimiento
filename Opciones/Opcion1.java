@@ -4,11 +4,6 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.*;
-import java.time.LocalDate;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Panel que representa la primera opción del menú principal.
@@ -38,19 +33,4 @@ public class Opcion1 extends JPanel {
         add(PanelT, BorderLayout.CENTER);
     }
 
-    void creacion()
-    {
-        LocalDate Nombre = LocalDate.now();
-
-        Archivos.Archivos archivo = new Archivos.Archivos();
-        ObjectMapper mapper = new ObjectMapper();
-
-
-        try {
-            mapper.writeValue(new File(Nombre + ".json"), archivo);
-            System.out.println("Archivo creado: " + Nombre + ".json");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

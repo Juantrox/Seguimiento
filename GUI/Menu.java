@@ -1,4 +1,6 @@
 package GUI;
+
+import DB.Conexion;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -74,7 +76,9 @@ public class Menu extends javax.swing.JPanel implements ActionListener {
                 MPAdd(new Opciones.Opcion3());
                 break;
             case "Guardar":
-                System.exit(0);
+                Conexion conexion = new Conexion();
+                conexion.cerrarConexion(null);
+                //System.exit(0);
                 break;
             default:
                 break;
