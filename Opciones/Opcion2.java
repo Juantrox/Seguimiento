@@ -26,7 +26,7 @@ public class Opcion2 extends JPanel implements ActionListener {
 
         PanelForm.setBackground(new Color(45, 45, 45));
 
-        JLabel label = new JLabel("Este es un panel personalizado Panel 2", SwingConstants.CENTER);
+        JLabel label = new JLabel("Actualización de material", SwingConstants.CENTER);
         label.setForeground(Color.WHITE);
         PanelForm.add(label, BorderLayout.CENTER);
 
