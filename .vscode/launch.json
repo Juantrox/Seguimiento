@@ -2,6 +2,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "Escritura",
+      "request": "launch",
+      "mainClass": "DB.Escritura",
+      "projectName": "seguimiento"
+    },
+    {
       "name": "Debug Main",
       "type": "java",
       "request": "launch",

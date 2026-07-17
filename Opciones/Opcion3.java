@@ -2,9 +2,11 @@ package Opciones;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Panel que representa la tercera opción del menú principal.
@@ -23,6 +25,7 @@ public class Opcion3 extends JPanel {
         PanelForm.setBackground(new Color(45, 45, 45));
         PanelForm.add(PanelNorte(), BorderLayout.NORTH);
         PanelForm.add(PanelTabla(), BorderLayout.CENTER);
+        PanelForm.add(PanelSur(), BorderLayout.SOUTH);
 
         // PanelT.setBorder(new EmptyBorder(2,2,2,2));
         PanelT.setBackground(new Color(30, 30, 30));
@@ -31,6 +34,9 @@ public class Opcion3 extends JPanel {
         PanelT.add(PanelForm, BorderLayout.CENTER);
         add(PanelT, BorderLayout.CENTER);
     }
+
+
+    //Usar panel norte para revisar las tablas de clientes e inventario
 
     public JPanel PanelNorte() {
 
@@ -43,29 +49,57 @@ public class Opcion3 extends JPanel {
         panelNorte.setBackground(new Color(100, 255, 10));
         panelNorte.add(label, BorderLayout.CENTER);
 
-        add(panelNorte, BorderLayout.CENTER);
-
         return panelNorte;
     }
 
+    //Limpiar y acoplar tabla a la base de datos de clientes (Crear otra tabla para la base de datos de inventario)
+
     public JScrollPane PanelTabla() {
 
-        String[] columnas = { "ID", "Nombre", "Apellido", "Email" };
-        Object[][] datos = {
-                { 1, "Juan", "Pérez", "juan.perez@example.com" },
-                { 2, "María", "Gómez", "maria.gomez@example.com" }
-        };
+        String[] columnas = { "Id", "Cliente", "Celular", "Marca", "Modelo", "Descripcion", "Estado", "FechaIn", "fechaOut", "FechaRep", "Adquisicion" };
+        DefaultTableModel model = new DefaultTableModel(columnas, 0);
 
-        JTable Clientes = new JTable(datos, columnas);
+        DB.Lectura lectura = new DB.Lectura();
+        java.util.List<String[]> datos = lectura.leerClientes();
+
+        for (String[] fila : datos) {
+            model.addRow(fila);
+        }
+
+        JTable Clientes = new JTable(model);
         estilotabla(Clientes);
 
         JScrollPane PanelTabla = new JScrollPane(Clientes);
-
         PanelTabla.setBackground(new Color(45, 45, 45));
 
-        add(PanelTabla, BorderLayout.CENTER);
-
         return PanelTabla;
+    }
+
+    public JPanel PanelSur()
+    {
+
+        //Crear opciones de la barra y reestilizar
+
+        JLabel label = new JLabel("Filtro (Lista desplegable)",SwingConstants.CENTER);
+        JLabel label2 = new JLabel("Busqueda(JTexfild)",SwingConstants.CENTER);
+        JLabel label3 = new JLabel("Boton buscar",SwingConstants.CENTER);
+        label.setForeground(Color.WHITE);
+        label2.setForeground(Color.WHITE);
+        label3.setForeground(Color.WHITE);
+
+        JPanel PanelSur = new JPanel(new GridLayout(1,3));
+
+        PanelSur.setBorder(new EmptyBorder(2,2,2,2));
+
+        PanelSur.setBackground(new Color(45,45,45));
+
+        PanelSur.add(label, BorderLayout.CENTER);
+        PanelSur.add(label2, BorderLayout.CENTER);
+        PanelSur.add(label3, BorderLayout.CENTER);
+
+        add(PanelSur,BorderLayout.CENTER);
+
+        return PanelSur;
     }
 
     public void estilotabla(JTable tabla) {
@@ -77,4 +111,25 @@ public class Opcion3 extends JPanel {
         tabla.setForeground(Color.WHITE);
         tabla.setShowGrid(false);
     }
+
+        //Gestionar eventos para los filtros de la barra sur
+
+        public void actionPerformed(ActionEvent e) {
+        String comando = e.getActionCommand();
+
+        switch (comando) {
+            case "x":
+             //   MPAdd();
+                break;
+            case "y":
+            //    MPAdd();
+                break;
+        }
+    }
+
+        public void MPAdd(JPanel panel) {
+        panel.removeAll();
+        panel.revalidate();
+        panel.repaint();
+        }
 }
