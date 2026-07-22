@@ -8,10 +8,13 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
 
+
 /**
  * Panel que representa la tercera opción del menú principal.
  */
-public class Opcion3 extends JPanel {
+public class Opcion3 extends JPanel implements ActionListener {
+
+    private final JPanel panelForm = new JPanel(new BorderLayout());
 
     /**
      * Crea el contenido visual de la opción 3.
@@ -20,18 +23,17 @@ public class Opcion3 extends JPanel {
         setLayout(new BorderLayout());
 
         JPanel PanelT = new JPanel(new BorderLayout());
-        JPanel PanelForm = new JPanel(new BorderLayout());
 
-        PanelForm.setBackground(new Color(45, 45, 45));
-        PanelForm.add(PanelNorte(), BorderLayout.NORTH);
-        PanelForm.add(PanelTabla(), BorderLayout.CENTER);
-        PanelForm.add(PanelSur(), BorderLayout.SOUTH);
+        panelForm.setBackground(new Color(45, 45, 45));
+        panelForm.add(PanelNorte(), BorderLayout.NORTH);
+        panelForm.add(PanelTablaC(), BorderLayout.CENTER);
+        panelForm.add(PanelSur(), BorderLayout.SOUTH);
 
         // PanelT.setBorder(new EmptyBorder(2,2,2,2));
         PanelT.setBackground(new Color(30, 30, 30));
         PanelT.setOpaque(true);
 
-        PanelT.add(PanelForm, BorderLayout.CENTER);
+        PanelT.add(panelForm, BorderLayout.CENTER);
         add(PanelT, BorderLayout.CENTER);
     }
 
@@ -40,21 +42,54 @@ public class Opcion3 extends JPanel {
 
     public JPanel PanelNorte() {
 
-        JLabel label = new JLabel("Este es un panel personalizado Panel 3", SwingConstants.CENTER);
-        label.setForeground(Color.WHITE);
+        JButton ClintesL = new JButton("Clientes");
+        JButton InventarioL = new JButton("Inventario");
 
-        JPanel panelNorte = new JPanel(new BorderLayout());
+        ClintesL.setForeground(Color.WHITE);
+        InventarioL.setForeground(Color.WHITE);
 
-        panelNorte.setBorder(new EmptyBorder(5, 5, 5, 5));
-        panelNorte.setBackground(new Color(100, 255, 10));
-        panelNorte.add(label, BorderLayout.CENTER);
+        JPanel panelNorte = new JPanel(new GridLayout(1, 2));
+
+        panelNorte.setBackground(Color.GREEN.darker());
+
+        estiloboton(ClintesL);
+        estiloboton(InventarioL);
+
+        ClintesL.setActionCommand("ClientesL");
+        ClintesL.addActionListener(this);
+        InventarioL.setActionCommand("InventarioL");
+        InventarioL.addActionListener(this);
+
+        panelNorte.add(ClintesL);
+        panelNorte.add(InventarioL);
 
         return panelNorte;
     }
 
+        public void estiloboton(JButton boton) {
+        boton.setFocusPainted(false);
+        boton.setBorderPainted(false);
+        boton.setContentAreaFilled(false);
+        boton.setForeground(Color.WHITE);
+        boton.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                boton.setOpaque(true);
+                boton.setBackground(new Color(60, 60, 60));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                boton.setOpaque(false);
+                boton.repaint();
+            }
+        });
+    }
+
     //Limpiar y acoplar tabla a la base de datos de clientes (Crear otra tabla para la base de datos de inventario)
 
-    public JScrollPane PanelTabla() {
+    public JScrollPane PanelTablaC() {
 
         String[] columnas = { "Id", "Cliente", "Celular", "Marca", "Modelo", "Descripcion", "Estado", "FechaIn", "fechaOut", "FechaRep", "Adquisicion" };
         DefaultTableModel model = new DefaultTableModel(columnas, 0);
@@ -93,11 +128,9 @@ public class Opcion3 extends JPanel {
 
         PanelSur.setBackground(new Color(45,45,45));
 
-        PanelSur.add(label, BorderLayout.CENTER);
-        PanelSur.add(label2, BorderLayout.CENTER);
-        PanelSur.add(label3, BorderLayout.CENTER);
-
-        add(PanelSur,BorderLayout.CENTER);
+        PanelSur.add(label);
+        PanelSur.add(label2);
+        PanelSur.add(label3);
 
         return PanelSur;
     }
@@ -112,24 +145,38 @@ public class Opcion3 extends JPanel {
         tabla.setShowGrid(false);
     }
 
-        //Gestionar eventos para los filtros de la barra sur
+    // Gestionar eventos para los botones del panel norte
 
-        public void actionPerformed(ActionEvent e) {
+    @Override
+    public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
 
         switch (comando) {
-            case "x":
-             //   MPAdd();
+            case "ClientesL":
+                panelForm.removeAll();
+                panelForm.add(PanelNorte(), BorderLayout.NORTH);
+                panelForm.add(PanelTablaC(), BorderLayout.CENTER);
+                panelForm.add(PanelSur(), BorderLayout.SOUTH);
+                panelForm.revalidate();
+                panelForm.repaint();
                 break;
-            case "y":
-            //    MPAdd();
+            case "InventarioL":
+                panelForm.removeAll();
+                panelForm.add(PanelNorte(), BorderLayout.NORTH);
+                panelForm.add(PanelInventario(), BorderLayout.CENTER);
+                panelForm.add(PanelSur(), BorderLayout.SOUTH);
+                panelForm.revalidate();
+                panelForm.repaint();
                 break;
         }
     }
 
-        public void MPAdd(JPanel panel) {
-        panel.removeAll();
-        panel.revalidate();
-        panel.repaint();
-        }
+    private JPanel PanelInventario() {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBackground(new Color(45, 45, 45));
+        JLabel label = new JLabel("Contenido de Inventario", SwingConstants.CENTER);
+        label.setForeground(Color.WHITE);
+        panel.add(label, BorderLayout.CENTER);
+        return panel;
+    }
 }

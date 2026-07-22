@@ -12,8 +12,8 @@ import java.awt.event.*;
  */
 public class Opcion1 extends JPanel implements ActionListener {
 
-    private final JPanel panelTop = new JPanel(new BorderLayout());
-    private final JPanel panelForm = new JPanel(new BorderLayout());
+    private final JPanel PanelT = new JPanel(new BorderLayout());
+    private final JPanel PanelForm = new JPanel(new BorderLayout());
 
     private final JTextField txtCliente = new JTextField(20);
     private final JTextField txtCelular = new JTextField(20);
@@ -32,40 +32,44 @@ public class Opcion1 extends JPanel implements ActionListener {
     public Opcion1() {
         setLayout(new BorderLayout());
 
-        panelTop.setBorder(new EmptyBorder(15, 15, 15, 15));
-        panelTop.setBackground(new Color(30, 30, 30));
-        panelTop.setOpaque(true);
+        PanelT.setBorder(new EmptyBorder(15, 15, 15, 15));
+        PanelT.setBackground(new Color(30, 30, 30));
+        PanelT.setOpaque(true);
 
-        panelForm.setBackground(new Color(45, 45, 45));
-        panelForm.add(crearPanelClientes(), BorderLayout.CENTER);
+        PanelForm.setBackground(new Color(45, 45, 45));
 
-        panelTop.add(crearPanelNorte(), BorderLayout.NORTH);
-        panelTop.add(panelForm, BorderLayout.CENTER);
-        add(panelTop, BorderLayout.CENTER);
+        JLabel label = new JLabel("Ingreso de material", SwingConstants.CENTER);
+        label.setForeground(Color.WHITE);
+        PanelForm.add(label, BorderLayout.CENTER);
+
+        PanelT.add(PanelNorte(), BorderLayout.NORTH);
+        PanelT.add(PanelForm, BorderLayout.CENTER);
+        add(PanelT, BorderLayout.CENTER);
     }
 
-    private JPanel crearPanelNorte() {
+    public JPanel PanelNorte() {
 
-        JButton btnClientes = new JButton("Clientes");
-        JButton btnInventario = new JButton("Inventario");
+        JButton ClintesL = new JButton("Clientes");
+        JButton InventarioL = new JButton("Inventario");
 
-        btnClientes.setForeground(Color.WHITE);
-        btnInventario.setForeground(Color.WHITE);
+        ClintesL.setForeground(Color.WHITE);
+        InventarioL.setForeground(Color.WHITE);
 
-        JPanel panelNorte = new JPanel(new GridLayout(1, 2, 8, 0));
-        panelNorte.setBorder(new EmptyBorder(5, 5, 5, 5));
+        JPanel panelNorte = new JPanel(new GridLayout(1, 2));
+
+        // panelNorte.setBorder(new EmptyBorder(5, 5, 5, 5));
         panelNorte.setBackground(Color.GREEN.darker());
 
-        estiloboton(btnClientes);
-        estiloboton(btnInventario);
+        estiloboton(ClintesL);
+        estiloboton(InventarioL);
 
-        btnClientes.setActionCommand("ClientesL");
-        btnClientes.addActionListener(this);
-        btnInventario.setActionCommand("InventarioL");
-        btnInventario.addActionListener(this);
+        ClintesL.setActionCommand("ClientesL");
+        ClintesL.addActionListener(this);
+        InventarioL.setActionCommand("InventarioL");
+        InventarioL.addActionListener(this);
 
-        panelNorte.add(btnClientes);
-        panelNorte.add(btnInventario);
+        panelNorte.add(ClintesL, BorderLayout.CENTER);
+        panelNorte.add(InventarioL, BorderLayout.CENTER);
 
         return panelNorte;
 
@@ -77,10 +81,10 @@ public class Opcion1 extends JPanel implements ActionListener {
 
         switch (comando) {
             case "ClientesL":
-                mostrarPanel(crearPanelClientes());
+                MPAdd(CLientes());
                 break;
             case "InventarioL":
-                mostrarPanel(crearPanelInventario());
+                MPAdd(Inventario());
                 break;
         }
     }
@@ -90,7 +94,6 @@ public class Opcion1 extends JPanel implements ActionListener {
         boton.setBorderPainted(false);
         boton.setContentAreaFilled(false);
         boton.setForeground(Color.WHITE);
-        // boton.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         boton.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -107,14 +110,14 @@ public class Opcion1 extends JPanel implements ActionListener {
         });
     }
 
-    private void mostrarPanel(JPanel panel) {
-        panelForm.removeAll();
-        panelForm.add(panel, BorderLayout.CENTER);
-        panelForm.revalidate();
-        panelForm.repaint();
+    public void MPAdd(JPanel panel) {
+        PanelForm.removeAll();
+        PanelForm.add(panel, BorderLayout.CENTER);
+        PanelForm.revalidate();
+        PanelForm.repaint();
     }
 
-    private JPanel crearPanelClientes() {
+    public JPanel CLientes() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(new Color(45, 45, 45));
 
@@ -201,7 +204,7 @@ public class Opcion1 extends JPanel implements ActionListener {
         }
     }
 
-    private JPanel crearPanelInventario() {
+    public JPanel Inventario() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBackground(new Color(45, 45, 45));
         JLabel label = new JLabel("Contenido de Inventario", SwingConstants.CENTER);
